@@ -16,15 +16,15 @@ public class InMemoryRepository {
         DATABASE.add(new Employee(1, "Michael", "Cane", "mcane@gmail.com"));
     }
 
-    void addEmployee(Employee employee) {
+    public void addEmployee(Employee employee) {
         DATABASE.add(employee);
     }
 
-    List<Employee> getAllEmployees() {
+    public List<Employee> getAllEmployees() {
         return List.copyOf(DATABASE);
     }
 
-    Employee findById(Integer id) {
+    public Employee findById(Integer id) {
         return DATABASE
                 .stream()
                 .filter(employee -> id.equals(employee.getId()))
@@ -33,11 +33,17 @@ public class InMemoryRepository {
     }
 
     // Assignment
-    void updateEmployee(Employee employee) {
+    public void updateEmployee(Employee employee) {
 
     }
 
-    Boolean deleteById(Integer id) {
-        
+    public Boolean deleteById(Integer id) {
+        Employee emp = DATABASE
+                .stream()
+                .filter(employee -> id.equals(employee.getId()))
+                .findFirst()
+                .orElseThrow();
+        DATABASE.remove(emp);
+        return Boolean.TRUE;
     }
 }
