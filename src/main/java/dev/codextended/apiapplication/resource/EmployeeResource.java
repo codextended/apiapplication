@@ -30,7 +30,6 @@ public class EmployeeResource {
 
     @PostMapping
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
-        employee.setId(employeeService.getAllEmployees().size() + 1);
         return ResponseEntity.ok(employeeService.addEmployee(employee));
     }
 
