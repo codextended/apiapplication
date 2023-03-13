@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Set;
 
@@ -20,8 +21,10 @@ public class Account {
     @GeneratedValue
     private Long id;
     @Column(unique = true)
+    @NotEmpty
     private String username;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @NotEmpty
     private String password;
     private boolean enabled = true;
     private boolean credentialExpired = false;

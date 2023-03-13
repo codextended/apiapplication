@@ -21,12 +21,27 @@ public class WebSecurityConfiguration {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.authenticationProvider(accountAuthenticationProvider);
 
-        http.csrf().disable();
-        http.authorizeHttpRequests()
-                .antMatchers(HttpMethod.POST, "/api/accounts/**")
-                .permitAll();
+//        http.csrf().disable();
+//        http.authorizeHttpRequests()
+//                .antMatchers(HttpMethod.POST, "/api/accounts/**")
+//                .permitAll();
+//
+//        http.authorizeHttpRequests()
+//                .anyRequest()
+//                .hasAnyRole("USER", "ADMIN")
+//                .and()
+//                .httpBasic(Customizer.withDefaults())
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//
+//        return http.build();
 
-        http.authorizeHttpRequests()
+        http.csrf().disable()
+                .authorizeHttpRequests()
+                .antMatchers(HttpMethod.POST, "/api/accounts/**")
+                .permitAll()
+                .antMatchers("/**")
+                .authenticated()
                 .anyRequest()
                 .hasAnyRole("USER", "ADMIN")
                 .and()
